@@ -58,5 +58,5 @@
         <property name="status" type="int"/>
         <property name="detail" type="string"/>
     </transfer>
-
 </transfers>
+
