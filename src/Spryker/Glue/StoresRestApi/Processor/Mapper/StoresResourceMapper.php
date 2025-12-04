@@ -10,20 +10,12 @@ namespace Spryker\Glue\StoresRestApi\Processor\Mapper;
 use Generated\Shared\Transfer\DynamicStoreRestAttributesTransfer;
 use Generated\Shared\Transfer\StoreLocaleRestAttributesTransfer;
 use Generated\Shared\Transfer\StoresRestAttributesTransfer;
+use Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToStoreClientInterface;
 
 class StoresResourceMapper implements StoresResourceMapperInterface
 {
-    /**
-     * @var \Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToStoreClientInterface
-     */
-    protected $storeClient;
-
-    /**
-     * @param \Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToStoreClientInterface $storeClient
-     */
-    public function __construct($storeClient)
+    public function __construct(protected StoresRestApiToStoreClientInterface $storeClient)
     {
-        $this->storeClient = $storeClient;
     }
 
     /**
