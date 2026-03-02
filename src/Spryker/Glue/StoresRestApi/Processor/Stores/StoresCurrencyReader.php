@@ -22,10 +22,6 @@ class StoresCurrencyReader implements StoresCurrencyReaderInterface
      */
     protected $storesCurrencyResourceMapper;
 
-    /**
-     * @param \Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToCurrencyClientInterface $currencyClient
-     * @param \Spryker\Glue\StoresRestApi\Processor\Mapper\StoresCurrencyResourceMapperInterface $storesCurrencyResourceMapper
-     */
     public function __construct(
         StoresRestApiToCurrencyClientInterface $currencyClient,
         StoresCurrencyResourceMapperInterface $storesCurrencyResourceMapper

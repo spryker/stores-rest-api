@@ -33,17 +33,11 @@ class StoresRestApiTester extends Actor
 {
     use _generated\StoresRestApiTesterActions;
 
-    /**
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     public function createContainer(): ContainerInterface
     {
         return new Container();
     }
 
-    /**
-     * @return \Spryker\Shared\ApplicationExtension\Dependency\Plugin\ApplicationPluginInterface
-     */
     public function createStoreHttpHeaderApplicationPlugin(): ApplicationPluginInterface
     {
         return new StoreHttpHeaderApplicationPlugin();

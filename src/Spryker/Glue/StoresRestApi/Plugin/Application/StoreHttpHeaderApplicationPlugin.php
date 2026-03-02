@@ -56,9 +56,6 @@ class StoreHttpHeaderApplicationPlugin extends AbstractPlugin implements Applica
         return $container;
     }
 
-    /**
-     * @return string
-     */
     protected function getStoreName(): string
     {
         $request = $this->getFactory()->createRequest();

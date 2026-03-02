@@ -27,33 +27,21 @@ use Symfony\Component\HttpFoundation\Request;
 
 class StoresRestApiFactory extends AbstractFactory
 {
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToCountryClientInterface
-     */
     public function getCountryClient(): StoresRestApiToCountryClientInterface
     {
         return $this->getProvidedDependency(StoresRestApiDependencyProvider::CLIENT_COUNTRY);
     }
 
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToCurrencyClientInterface
-     */
     public function getCurrencyClient(): StoresRestApiToCurrencyClientInterface
     {
         return $this->getProvidedDependency(StoresRestApiDependencyProvider::CLIENT_CURRENCY);
     }
 
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToStoreClientInterface
-     */
     public function getStoreClient(): StoresRestApiToStoreClientInterface
     {
         return $this->getProvidedDependency(StoresRestApiDependencyProvider::CLIENT_STORE);
     }
 
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Processor\Stores\StoresReaderInterface
-     */
     public function createStoresReader(): StoresReaderInterface
     {
         return new StoresReader(
@@ -65,9 +53,6 @@ class StoresRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Processor\Stores\StoresCountryReaderInterface
-     */
     public function createStoresCountryReader(): StoresCountryReaderInterface
     {
         return new StoresCountryReader(
@@ -76,9 +61,6 @@ class StoresRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Processor\Stores\StoresCurrencyReaderInterface
-     */
     public function createStoresCurrencyReader(): StoresCurrencyReaderInterface
     {
         return new StoresCurrencyReader(
@@ -87,33 +69,21 @@ class StoresRestApiFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Processor\Mapper\StoresResourceMapperInterface
-     */
     public function createStoresResourceMapper(): StoresResourceMapperInterface
     {
         return new StoresResourceMapper($this->getStoreClient());
     }
 
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Processor\Mapper\StoresCountryResourceMapperInterface
-     */
     public function createStoresCountryResourceMapper(): StoresCountryResourceMapperInterface
     {
         return new StoresCountryResourceMapper();
     }
 
-    /**
-     * @return \Spryker\Glue\StoresRestApi\Processor\Mapper\StoresCurrencyResourceMapperInterface
-     */
     public function createStoresCurrencyResourceMapper(): StoresCurrencyResourceMapperInterface
     {
         return new StoresCurrencyResourceMapper();
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request
-     */
     public function createRequest(): Request
     {
         return Request::createFromGlobals();

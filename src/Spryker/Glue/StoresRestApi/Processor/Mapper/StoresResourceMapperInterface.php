@@ -23,11 +23,6 @@ interface StoresResourceMapperInterface
         array $currencies
     ): StoresRestAttributesTransfer;
 
-    /**
-     * @param \Generated\Shared\Transfer\StoresRestAttributesTransfer $storesRestAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\DynamicStoreRestAttributesTransfer
-     */
     public function mapStoresRestAttributesTransferToDynamicStoreRestAttributesTransfer(
         StoresRestAttributesTransfer $storesRestAttributesTransfer
     ): DynamicStoreRestAttributesTransfer;

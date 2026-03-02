@@ -45,13 +45,6 @@ class StoresReader implements StoresReaderInterface
      */
     protected $storeClient;
 
-    /**
-     * @param \Spryker\Glue\StoresRestApi\Processor\Stores\StoresCountryReaderInterface $countryReader
-     * @param \Spryker\Glue\StoresRestApi\Processor\Stores\StoresCurrencyReaderInterface $currencyReader
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResourceBuilderInterface $restResourceBuilder
-     * @param \Spryker\Glue\StoresRestApi\Processor\Mapper\StoresResourceMapperInterface $storesResourceMapper
-     * @param \Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToStoreClientInterface $storeClient
-     */
     public function __construct(
         StoresCountryReaderInterface $countryReader,
         StoresCurrencyReaderInterface $currencyReader,
@@ -66,11 +59,6 @@ class StoresReader implements StoresReaderInterface
         $this->storeClient = $storeClient;
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     public function getStoresAttributes(RestRequestInterface $restRequest): RestResponseInterface
     {
         /* Required by infrastructure, exists only for BC with DMS OFF mode. */
@@ -88,11 +76,6 @@ class StoresReader implements StoresReaderInterface
         return $this->getRestResponse($currentStore, $this->restResourceBuilder->createRestResponse());
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\Request\Data\RestRequestInterface $restRequest
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     protected function getDynamicStoreStoresAttributes(RestRequestInterface $restRequest): RestResponseInterface
     {
         $response = $this->restResourceBuilder->createRestResponse();
@@ -116,12 +99,6 @@ class StoresReader implements StoresReaderInterface
         return $response;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\StoreTransfer $storeTransfer
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     protected function getRestResponse(
         StoreTransfer $storeTransfer,
         RestResponseInterface $restResponse
@@ -147,19 +124,11 @@ class StoresReader implements StoresReaderInterface
         return $restResponse->addResource($restResource);
     }
 
-    /**
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     protected function getInvalidStoreRestResponse(): RestResponseInterface
     {
         return $this->addInvalidStoreIdErrorToResponse($this->restResourceBuilder->createRestResponse());
     }
 
-    /**
-     * @param \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface $restResponse
-     *
-     * @return \Spryker\Glue\GlueApplication\Rest\JsonApi\RestResponseInterface
-     */
     protected function addInvalidStoreIdErrorToResponse(RestResponseInterface $restResponse): RestResponseInterface
     {
         $restErrorTransfer = (new RestErrorMessageTransfer())

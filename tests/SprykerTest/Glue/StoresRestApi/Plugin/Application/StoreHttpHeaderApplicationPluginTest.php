@@ -60,9 +60,6 @@ class StoreHttpHeaderApplicationPluginTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     public function testStoreHttpHeaderApplicationPluginServiceStoreNotDefined(): void
     {
         //Arrange
@@ -75,9 +72,6 @@ class StoreHttpHeaderApplicationPluginTest extends Unit
         $this->assertFalse($resultContainer->has(static::SERVICE_STORE));
     }
 
-    /**
-     * @return void
-     */
     public function testStoreHttpHeaderApplicationPluginSetStoreFromHeader(): void
     {
         // Arrange
@@ -92,9 +86,6 @@ class StoreHttpHeaderApplicationPluginTest extends Unit
         $this->assertEquals(static::DE_STORE_NAME, $resultContainer->get(static::SERVICE_STORE));
     }
 
-    /**
-     * @return void
-     */
     public function testStoreHttpHeaderApplicationPluginSetStoreFromParameter(): void
     {
         // Arrange
@@ -108,9 +99,6 @@ class StoreHttpHeaderApplicationPluginTest extends Unit
         $this->assertEquals(static::DE_STORE_NAME, $resultContainer->get(static::SERVICE_STORE));
     }
 
-    /**
-     * @return void
-     */
     public function testStoreHttpHeaderApplicationPluginSetStoreFromHeaderAndParameter(): void
     {
         // Arrange
@@ -139,11 +127,6 @@ class StoreHttpHeaderApplicationPluginTest extends Unit
         return $mockFactory;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $mockRequest
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function provide(Request $mockRequest): ContainerInterface
     {
         $container = $this->tester->createContainer();

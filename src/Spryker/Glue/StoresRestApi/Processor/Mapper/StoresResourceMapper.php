@@ -55,23 +55,12 @@ class StoresResourceMapper implements StoresResourceMapperInterface
         return $storesRestAttributes;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\StoresRestAttributesTransfer $storesRestAttributesTransfer
-     *
-     * @return \Generated\Shared\Transfer\DynamicStoreRestAttributesTransfer
-     */
     public function mapStoresRestAttributesTransferToDynamicStoreRestAttributesTransfer(
         StoresRestAttributesTransfer $storesRestAttributesTransfer
     ): DynamicStoreRestAttributesTransfer {
         return (new DynamicStoreRestAttributesTransfer())->fromArray($storesRestAttributesTransfer->toArray(), true);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\StoresRestAttributesTransfer $storesRestAttributes
-     * @param array $locales
-     *
-     * @return \Generated\Shared\Transfer\StoresRestAttributesTransfer
-     */
     protected function addLocaleToStoresRestAttributes(
         StoresRestAttributesTransfer $storesRestAttributes,
         array $locales
@@ -87,22 +76,11 @@ class StoresResourceMapper implements StoresResourceMapperInterface
         return $storesRestAttributes;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\StoresRestAttributesTransfer $storesRestAttributes
-     *
-     * @return \Generated\Shared\Transfer\StoresRestAttributesTransfer
-     */
     protected function addTimeZoneToStoresRestAttributes(StoresRestAttributesTransfer $storesRestAttributes): StoresRestAttributesTransfer
     {
         return $storesRestAttributes->setTimeZone($this->storeClient->getCurrentStore()->getTimezone());
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\StoresRestAttributesTransfer $storesRestAttributes
-     * @param string $defaultCurrency
-     *
-     * @return \Generated\Shared\Transfer\StoresRestAttributesTransfer
-     */
     protected function addDefaultCurrencyToStoresRestAttributes(
         StoresRestAttributesTransfer $storesRestAttributes,
         string $defaultCurrency
