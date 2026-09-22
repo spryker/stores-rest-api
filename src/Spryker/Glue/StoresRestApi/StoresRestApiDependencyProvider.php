@@ -18,26 +18,20 @@ use Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToStoreClientBridg
  */
 class StoresRestApiDependencyProvider extends AbstractBundleDependencyProvider
 {
-    /**
-     * @var string
-     */
-    public const CLIENT_COUNTRY = 'CLIENT_COUNTRY';
+    public const string CLIENT_COUNTRY = 'CLIENT_COUNTRY';
 
-    /**
-     * @var string
-     */
-    public const CLIENT_CURRENCY = 'CLIENT_CURRENCY';
+    public const string CLIENT_CURRENCY = 'CLIENT_CURRENCY';
 
-    /**
-     * @var string
-     */
-    public const CLIENT_STORE = 'CLIENT_STORE';
+    public const string CLIENT_STORE = 'CLIENT_STORE';
+
+    public const string CLIENT_STORE_STORAGE = 'CLIENT_STORE_STORAGE';
 
     public function provideDependencies(Container $container): Container
     {
         $container = $this->addCountryClient($container);
         $container = $this->addCurrencyClient($container);
         $container = $this->addStoreClient($container);
+        $container = $this->addStoreStorageClient($container);
 
         return $container;
     }
@@ -64,6 +58,15 @@ class StoresRestApiDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::CLIENT_STORE, function (Container $container) {
             return new StoresRestApiToStoreClientBridge($container->getLocator()->store()->client());
+        });
+
+        return $container;
+    }
+
+    protected function addStoreStorageClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_STORE_STORAGE, function (Container $container) {
+            return $container->getLocator()->storeStorage()->client();
         });
 
         return $container;

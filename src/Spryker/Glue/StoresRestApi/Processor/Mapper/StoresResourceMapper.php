@@ -10,14 +10,10 @@ namespace Spryker\Glue\StoresRestApi\Processor\Mapper;
 use Generated\Shared\Transfer\DynamicStoreRestAttributesTransfer;
 use Generated\Shared\Transfer\StoreLocaleRestAttributesTransfer;
 use Generated\Shared\Transfer\StoresRestAttributesTransfer;
-use Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToStoreClientInterface;
+use Generated\Shared\Transfer\StoreTransfer;
 
 class StoresResourceMapper implements StoresResourceMapperInterface
 {
-    public function __construct(protected StoresRestApiToStoreClientInterface $storeClient)
-    {
-    }
-
     /**
      * @param array<\Generated\Shared\Transfer\StoreCountryRestAttributesTransfer> $countries
      * @param array<\Generated\Shared\Transfer\StoreCurrencyRestAttributesTransfer> $currencies
@@ -25,6 +21,7 @@ class StoresResourceMapper implements StoresResourceMapperInterface
      * @return \Generated\Shared\Transfer\StoresRestAttributesTransfer
      */
     public function mapStoreToStoresRestAttribute(
+        StoreTransfer $storeTransfer,
         array $countries,
         array $currencies
     ): StoresRestAttributesTransfer {
@@ -32,7 +29,7 @@ class StoresResourceMapper implements StoresResourceMapperInterface
 
         $storesRestAttributes = $this->addLocaleToStoresRestAttributes(
             $storesRestAttributes,
-            $this->storeClient->getCurrentStore()->getAvailableLocaleIsoCodes(),
+            $storeTransfer->getAvailableLocaleIsoCodes(),
         );
 
         $storesRestAttributes = $this->addStoreCountryToStoresRestAttributes(
@@ -40,11 +37,11 @@ class StoresResourceMapper implements StoresResourceMapperInterface
             $countries,
         );
 
-        $storesRestAttributes = $this->addTimeZoneToStoresRestAttributes($storesRestAttributes);
+        $storesRestAttributes = $this->addTimeZoneToStoresRestAttributes($storesRestAttributes, $storeTransfer->getTimezone());
 
         $storesRestAttributes = $this->addDefaultCurrencyToStoresRestAttributes(
             $storesRestAttributes,
-            $this->storeClient->getCurrentStore()->getDefaultCurrencyIsoCode(),
+            $storeTransfer->getDefaultCurrencyIsoCodeOrFail(),
         );
 
         $storesRestAttributes = $this->addStoreCurrencyToStoresRestAttributes(
@@ -76,9 +73,11 @@ class StoresResourceMapper implements StoresResourceMapperInterface
         return $storesRestAttributes;
     }
 
-    protected function addTimeZoneToStoresRestAttributes(StoresRestAttributesTransfer $storesRestAttributes): StoresRestAttributesTransfer
-    {
-        return $storesRestAttributes->setTimeZone($this->storeClient->getCurrentStore()->getTimezone());
+    protected function addTimeZoneToStoresRestAttributes(
+        StoresRestAttributesTransfer $storesRestAttributes,
+        ?string $timeZone
+    ): StoresRestAttributesTransfer {
+        return $storesRestAttributes->setTimeZone($timeZone);
     }
 
     protected function addDefaultCurrencyToStoresRestAttributes(

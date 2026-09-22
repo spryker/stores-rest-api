@@ -78,4 +78,7 @@
     <transfer name="StoreCriteria">
     </transfer>
 
+    <transfer name="StoreConditions">
+    </transfer>
+
 </transfers>

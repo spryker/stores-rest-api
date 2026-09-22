@@ -7,6 +7,7 @@
 
 namespace Spryker\Glue\StoresRestApi;
 
+use Spryker\Client\StoreStorage\StoreStorageClientInterface;
 use Spryker\Glue\Kernel\AbstractFactory;
 use Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToCountryClientInterface;
 use Spryker\Glue\StoresRestApi\Dependency\Client\StoresRestApiToCurrencyClientInterface;
@@ -42,6 +43,11 @@ class StoresRestApiFactory extends AbstractFactory
         return $this->getProvidedDependency(StoresRestApiDependencyProvider::CLIENT_STORE);
     }
 
+    public function getStoreStorageClient(): StoreStorageClientInterface
+    {
+        return $this->getProvidedDependency(StoresRestApiDependencyProvider::CLIENT_STORE_STORAGE);
+    }
+
     public function createStoresReader(): StoresReaderInterface
     {
         return new StoresReader(
@@ -50,6 +56,7 @@ class StoresRestApiFactory extends AbstractFactory
             $this->getResourceBuilder(),
             $this->createStoresResourceMapper(),
             $this->getStoreClient(),
+            $this->getStoreStorageClient(),
         );
     }
 
@@ -71,7 +78,7 @@ class StoresRestApiFactory extends AbstractFactory
 
     public function createStoresResourceMapper(): StoresResourceMapperInterface
     {
-        return new StoresResourceMapper($this->getStoreClient());
+        return new StoresResourceMapper();
     }
 
     public function createStoresCountryResourceMapper(): StoresCountryResourceMapperInterface
