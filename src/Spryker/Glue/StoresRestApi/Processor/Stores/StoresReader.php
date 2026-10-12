@@ -88,6 +88,12 @@ class StoresReader implements StoresReaderInterface
         $storeId = $restRequest->getResource()->getId();
 
         if ($storeId !== null) {
+            /* Storage-first existence check: `StoreClient::getStoreByName()` throws for a store no expander
+               can resolve, and the legacy Glue stack would surface that as a 500 instead of the 404 below. */
+            if ($this->storeStorageClient->findStoreByName($storeId) === null) {
+                return $this->getInvalidStoreRestResponse();
+            }
+
             $storeTransfer = $this->storeClient->getStoreByName($storeId);
 
             if ($storeTransfer->getIdStore() === null) {
